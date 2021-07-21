@@ -29,11 +29,16 @@ const game = {
     },
     fillCell(e) {
         const num = parseInt(e.key);
-        const { activeCell, board, activeSquare } = this;
+        const { activeCell, board, activeRow, activeColumn } = this;
         const canChange = this.startBoard[activeCell] === '.';
         const candidates = sudoku.get_candidates(this.board);
 
         if (!canChange || num === 0 || isNaN(num)) {
+            return ;
+        }
+
+        if (!candidates[activeRow][activeColumn].includes(num)) {
+            alert('Не валидный ввод');
             return ;
         }
 
